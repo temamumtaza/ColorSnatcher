@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "desc": "Membuat struktur dasar HTML, CSS, dan JavaScript",
+    "complexity": "medium",
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "desc": "Implementasi fitur unggah gambar",
+    "complexity": "low",
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "desc": "Implementasi algoritma KMeans untuk deteksi warna dominan",
+    "complexity": "high",
+    "status": "pending",
+    "subtasks": [
+      {
+        "id": "3.1",
+        "desc": "Implementasi fungsi untuk mengekstrak data piksel dari gambar",
+        "complexity": "medium",
+        "status": "pending"
+      },
+      {
+        "id": "3.2",
+        "desc": "Implementasi algoritma KMeans untuk clustering warna",
+        "complexity": "high",
+        "status": "pending"
+      },
+      {
+        "id": "3.3",
+        "desc": "Optimasi performa algoritma untuk gambar besar",
+        "complexity": "medium",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "desc": "Menampilkan palet warna dengan nilai RGB dan HEX",
+    "complexity": "medium",
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "desc": "Implementasi fitur salin warna ke clipboard",
+    "complexity": "medium",
+    "status": "pending"
+  },
+  {
+    "id": 6,
+    "desc": "Implementasi fitur simpan palet sebagai gambar",
+    "complexity": "high",
+    "status": "pending",
+    "subtasks": [
+      {
+        "id": "6.1",
+        "desc": "Membuat fungsi untuk merender palet warna ke canvas",
+        "complexity": "medium",
+        "status": "pending"
+      },
+      {
+        "id": "6.2",
+        "desc": "Implementasi fungsi untuk mengkonversi canvas ke gambar PNG",
+        "complexity": "medium",
+        "status": "pending"
+      },
+      {
+        "id": "6.3",
+        "desc": "Menambahkan opsi untuk menyertakan nilai warna dalam gambar",
+        "complexity": "medium",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "desc": "Membuat UI responsif untuk desktop dan mobile",
+    "complexity": "medium",
+    "status": "pending"
+  },
+  {
+    "id": 8,
+    "desc": "Pengujian dan debugging",
+    "complexity": "medium",
+    "status": "pending"
+  }
+]
