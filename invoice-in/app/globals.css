@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==== Custom Color Scheme ==== */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 222.2 84% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 14.3% 42%;
+
+    --accent: 210 20% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 89%;
+    --input: 210 20% 89%;
+    --ring: 222.2 84% 60%;
+
+    --radius: 0.375rem;
+  }
+
+  .dark {
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 98%;
+
+    --card: 224 28% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 28% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 222.2 84% 70%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 22.6% 24.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 22.6% 24.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 22.6% 24.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 42%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 19% 25%;
+    --input: 217.2 19% 25%;
+    --ring: 224.3 76.3% 60%;
+  }
+}
+
+/* ==== Base Styling ==== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-foreground;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
+  a {
+    @apply text-primary hover:underline underline-offset-2;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  ul, ol {
+    @apply pl-6 mb-4 list-disc;
+  }
+
+  blockquote {
+    @apply border-l-4 border-muted pl-4 italic text-muted-foreground;
+  }
+
+  code {
+    @apply font-mono bg-muted text-sm px-1.5 py-0.5 rounded;
+  }
+
+  pre {
+    @apply bg-muted text-sm p-4 rounded overflow-x-auto;
+  }
+
+  input, textarea, select {
+    @apply bg-background text-foreground border border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring transition-all;
+  }
+
+  button {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  /* ==== Custom Radio Button Modern Bulat ==== */
+  input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    @apply w-4 h-4 border-2 border-border rounded-full cursor-pointer bg-background checked:border-primary focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-150;
+    position: relative;
+  }
+
+  input[type="radio"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background-color: hsl(var(--primary));
+    border-radius: 9999px;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  input[type="radio"]:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

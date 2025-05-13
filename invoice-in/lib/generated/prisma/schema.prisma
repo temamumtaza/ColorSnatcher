@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          String    @id @default(uuid())
+  name        String
+  address     String?
+  city        String?
+  state       String?
+  postalCode  String?
+  country     String?
+  email       String?
+  phone       String?
+  website     String?
+  logoUrl     String?
+  taxId       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  invoices    Invoice[]
+  products    Product[]
+  colorScheme Json? // Store color scheme preferences as JSON
+}
+
+model Customer {
+  id         String    @id @default(uuid())
+  name       String
+  email      String?
+  phone      String?
+  address    String?
+  city       String?
+  state      String?
+  postalCode String?
+  country    String?
+  taxId      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  invoices   Invoice[]
+}
+
+model Product {
+  id           String        @id @default(uuid())
+  name         String
+  description  String?
+  price        Decimal       @db.Decimal(10, 2)
+  unit         String?
+  taxRate      Decimal?      @db.Decimal(5, 2)
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  invoiceItems InvoiceItem[]
+}
+
+model Invoice {
+  id            String        @id @default(uuid())
+  invoiceNumber String        @unique
+  company       Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId     String
+  customer      Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId    String
+  issueDate     DateTime
+  dueDate       DateTime
+  status        InvoiceStatus @default(DRAFT)
+  paymentTerms  String?
+  notes         String?
+  subtotal      Decimal       @db.Decimal(10, 2)
+  taxTotal      Decimal       @db.Decimal(10, 2)
+  total         Decimal       @db.Decimal(10, 2)
+  items         InvoiceItem[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model InvoiceItem {
+  id          String  @id @default(uuid())
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId   String
+  description String?
+  quantity    Decimal @db.Decimal(10, 2)
+  unitPrice   Decimal @db.Decimal(10, 2)
+  taxRate     Decimal @db.Decimal(5, 2)
+  taxAmount   Decimal @db.Decimal(10, 2)
+  subtotal    Decimal @db.Decimal(10, 2)
+  total       Decimal @db.Decimal(10, 2)
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
