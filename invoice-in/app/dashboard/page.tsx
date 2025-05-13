@@ -6,7 +6,7 @@ import CompanySettings from "@/components/company-settings"
 import ProductCatalog from "@/components/product-catalog"
 import InvoiceHistory from "@/components/invoice-history"
 
-export default function Home() {
+export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("chat")
 
   return (
@@ -53,4 +53,4 @@ export default function Home() {
       </div>
     </div>
   )
-}
+} 

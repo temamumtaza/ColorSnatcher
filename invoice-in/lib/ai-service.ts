@@ -4,9 +4,9 @@ import { useProductStore } from "./stores/product-store"
 
 export async function generateInvoiceFromText(text: string) {
   try {
-    // Get product catalog to potentially enhance the prompt
+    // Get product catalog from store
     const productStore = useProductStore.getState()
-    const products = productStore.products
+    const products = productStore.products || []
 
     try {
       // Call our server-side API route

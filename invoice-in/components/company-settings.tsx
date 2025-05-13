@@ -10,18 +10,35 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Plus, Trash2, Check } from "lucide-react"
-import { useCompanyStore } from "@/lib/stores/company-store"
+import { useCompanyStore, Company } from "@/lib/stores/company-store"
 import { createCompany, deleteCompany as deleteCompanyAction, getCompanies, updateCompany as updateCompanyAction } from "@/app/actions/company"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+
+interface CompanyFormData {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  email: string;
+  phone: string;
+  website: string;
+  taxId: string;
+  colorScheme: {
+    accentColor: string;
+    logoUrl?: string;
+  };
+}
 
 export default function CompanySettings() {
   const { companies, activeCompany, addCompany, updateCompany, deleteCompany, setActiveCompany } = useCompanyStore()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [dbCompanies, setDbCompanies] = useState<any[]>([])
+  const [dbCompanies, setDbCompanies] = useState<Company[]>([])
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CompanyFormData>({
     name: "",
     address: "",
     city: "",
@@ -87,7 +104,7 @@ export default function CompanySettings() {
         phone: activeCompany.phone || "",
         website: activeCompany.website || "",
         taxId: activeCompany.taxId || "",
-        colorScheme: activeCompany.colorScheme || { accentColor: "blue", logoUrl: "" }
+        colorScheme: activeCompany.colorScheme || { accentColor: "blue" }
       })
       setEditId(activeCompany.id)
     }
@@ -154,7 +171,7 @@ export default function CompanySettings() {
     }
   }
 
-  const handleEdit = (company: any) => {
+  const handleEdit = (company: Company) => {
     setIsEditing(true)
     setEditId(company.id)
     setFormData({
@@ -168,7 +185,7 @@ export default function CompanySettings() {
       phone: company.phone || "",
       website: company.website || "",
       taxId: company.taxId || "",
-      colorScheme: company.colorScheme || { accentColor: "blue", logoUrl: "" }
+      colorScheme: company.colorScheme || { accentColor: "blue" }
     })
   }
 
